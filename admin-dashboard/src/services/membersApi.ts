@@ -18,7 +18,7 @@ export interface Member {
   created_at: string
   updated_at: string
   subscriptions?: Subscription[]
-  coach?: Coach
+  coach?: Coach | null
   workout_plans?: WorkoutPlan[]
   nutrition_plans?: NutritionPlan[]
   fitness_data?: FitnessData[]

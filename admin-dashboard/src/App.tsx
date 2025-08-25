@@ -7,6 +7,14 @@ import Layout from './components/Layout'
 import Dashboard from './pages/Dashboard'
 import Members from './pages/Members'
 import Coaches from './pages/Coaches'
+import Subscriptions from './pages/Subscriptions'
+import Memberships from './pages/Memberships'
+import Attendance from './pages/Attendance'
+import Reports from './pages/Reports'
+import Settings from './pages/Settings'
+import WorkoutPlans from './pages/WorkoutPlans'
+import NutritionPlans from './pages/NutritionPlans'
+import FitnessData from './pages/FitnessData'
 import Login from './pages/Login'
 import Unauthorized from './pages/Unauthorized'
 
@@ -45,6 +53,70 @@ function App() {
             <AdminRoute>
               <Layout>
                 <Coaches />
+              </Layout>
+            </AdminRoute>
+          } />
+          
+          <Route path="/subscriptions" element={
+            <AdminRoute>
+              <Layout>
+                <Subscriptions />
+              </Layout>
+            </AdminRoute>
+          } />
+          
+          <Route path="/memberships" element={
+            <AdminRoute>
+              <Layout>
+                <Memberships />
+              </Layout>
+            </AdminRoute>
+          } />
+          
+          <Route path="/attendance" element={
+            <AdminRoute>
+              <Layout>
+                <Attendance />
+              </Layout>
+            </AdminRoute>
+          } />
+          
+          <Route path="/reports" element={
+            <AdminRoute>
+              <Layout>
+                <Reports />
+              </Layout>
+            </AdminRoute>
+          } />
+          
+          <Route path="/settings" element={
+            <AdminRoute>
+              <Layout>
+                <Settings />
+              </Layout>
+            </AdminRoute>
+          } />
+          
+          <Route path="/workout-plans" element={
+            <AdminRoute>
+              <Layout>
+                <WorkoutPlans />
+              </Layout>
+            </AdminRoute>
+          } />
+          
+          <Route path="/nutrition-plans" element={
+            <AdminRoute>
+              <Layout>
+                <NutritionPlans />
+              </Layout>
+            </AdminRoute>
+          } />
+          
+          <Route path="/fitness-data" element={
+            <AdminRoute>
+              <Layout>
+                <FitnessData />
               </Layout>
             </AdminRoute>
           } />

@@ -1,0 +1,772 @@
+{
+	"info": {
+		"_postman_id": "gym-system-api-collection",
+		"name": "Gym System API",
+		"description": "Complete API collection for Gym Management System - Dashboard & Mobile App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "🔐 Authentication",
+			"item": [
+				{
+					"name": "Dashboard Login (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "login"]
+						}
+					}
+				},
+				{
+					"name": "Mobile Login (Coach/Member)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"coach@test.com\",\n    \"password\": \"12345678\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mobile/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "mobile", "login"]
+						}
+					}
+				},
+				{
+					"name": "Register New User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"أحمد محمد\",\n    \"email\": \"ahmed@example.com\",\n    \"password\": \"12345678\",\n    \"password_confirmation\": \"12345678\",\n    \"phone\": \"0123456789\",\n    \"role\": \"member\",\n    \"gender\": \"male\",\n    \"date_of_birth\": \"1990-01-01\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/register",
+							"host": ["{{base_url}}"],
+							"path": ["api", "register"]
+						}
+					}
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/logout",
+							"host": ["{{base_url}}"],
+							"path": ["api", "logout"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "👤 User Profile",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"أحمد محمد\",\n    \"phone\": \"0123456789\",\n    \"gender\": \"male\",\n    \"date_of_birth\": \"1990-01-01\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "profile"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📊 Dashboard (Admin Only)",
+			"item": [
+				{
+					"name": "Dashboard Overview",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/dashboard/overview",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dashboard", "overview"]
+						}
+					}
+				},
+				{
+					"name": "Dashboard Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/dashboard/stats",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dashboard", "stats"]
+						}
+					}
+				},
+				{
+					"name": "Members Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/dashboard/members-stats",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dashboard", "members-stats"]
+						}
+					}
+				},
+				{
+					"name": "Coaches Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/dashboard/coaches-stats",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dashboard", "coaches-stats"]
+						}
+					}
+				},
+				{
+					"name": "Revenue Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/dashboard/revenue-stats",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dashboard", "revenue-stats"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "👥 User Management (Admin Only)",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users"]
+						}
+					}
+				},
+				{
+					"name": "Get Coaches List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/coaches/list",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", "coaches", "list"]
+						}
+					}
+				},
+				{
+					"name": "Get Members List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/members/list",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", "members", "list"]
+						}
+					}
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", "1"]
+						}
+					}
+				},
+				{
+					"name": "Create New User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"محمد أحمد\",\n    \"email\": \"mohamed@example.com\",\n    \"password\": \"12345678\",\n    \"phone\": \"0123456789\",\n    \"role\": \"member\",\n    \"gender\": \"male\",\n    \"date_of_birth\": \"1990-01-01\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users"]
+						}
+					}
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"محمد أحمد\",\n    \"phone\": \"0123456789\",\n    \"gender\": \"male\",\n    \"date_of_birth\": \"1990-01-01\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🏋️ Workout Plans",
+			"item": [
+				{
+					"name": "Get All Workout Plans (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/workout-plans",
+							"host": ["{{base_url}}"],
+							"path": ["api", "workout-plans"]
+						}
+					}
+				},
+				{
+					"name": "Create Workout Plan (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"خطة تمارين للمبتدئين\",\n    \"description\": \"خطة تمارين مناسبة للمبتدئين\",\n    \"duration_weeks\": 4,\n    \"difficulty_level\": \"beginner\",\n    \"member_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/workout-plans",
+							"host": ["{{base_url}}"],
+							"path": ["api", "workout-plans"]
+						}
+					}
+				},
+				{
+					"name": "Get Member Workout Plans (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/workout-plans/member/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "workout-plans", "member", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🥗 Nutrition Plans",
+			"item": [
+				{
+					"name": "Get All Nutrition Plans (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/nutrition-plans",
+							"host": ["{{base_url}}"],
+							"path": ["api", "nutrition-plans"]
+						}
+					}
+				},
+				{
+					"name": "Create Nutrition Plan (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"خطة تغذية صحية\",\n    \"description\": \"خطة تغذية متوازنة\",\n    \"daily_calories\": 2000,\n    \"member_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/nutrition-plans",
+							"host": ["{{base_url}}"],
+							"path": ["api", "nutrition-plans"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "💳 Subscriptions",
+			"item": [
+				{
+					"name": "Get All Subscriptions (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/subscriptions",
+							"host": ["{{base_url}}"],
+							"path": ["api", "subscriptions"]
+						}
+					}
+				},
+				{
+					"name": "Create Subscription (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"membership_id\": 1,\n    \"start_date\": \"2024-01-01\",\n    \"end_date\": \"2024-12-31\",\n    \"is_active\": true,\n    \"status\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/subscriptions",
+							"host": ["{{base_url}}"],
+							"path": ["api", "subscriptions"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📱 Coach Mobile App",
+			"item": [
+				{
+					"name": "Get My Members",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{coach_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/coach/my-members",
+							"host": ["{{base_url}}"],
+							"path": ["api", "coach", "my-members"]
+						}
+					}
+				},
+				{
+					"name": "Get My Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{coach_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/coach/my-stats",
+							"host": ["{{base_url}}"],
+							"path": ["api", "coach", "my-stats"]
+						}
+					}
+				},
+				{
+					"name": "Get Member Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{coach_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/coach/member/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "coach", "member", "1"]
+						}
+					}
+				},
+				{
+					"name": "Create Workout Plan (Coach)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{coach_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"خطة تمارين شخصية\",\n    \"description\": \"خطة تمارين مخصصة\",\n    \"duration_weeks\": 6,\n    \"difficulty_level\": \"intermediate\",\n    \"member_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/coach/workout-plan",
+							"host": ["{{base_url}}"],
+							"path": ["api", "coach", "workout-plan"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📱 Member Mobile App",
+			"item": [
+				{
+					"name": "Get My Coach",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{member_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/member/my-coach",
+							"host": ["{{base_url}}"],
+							"path": ["api", "member", "my-coach"]
+						}
+					}
+				},
+				{
+					"name": "Get My Workout Plans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{member_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/member/my-workout-plans",
+							"host": ["{{base_url}}"],
+							"path": ["api", "member", "my-workout-plans"]
+						}
+					}
+				},
+				{
+					"name": "Get My Nutrition Plans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{member_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/member/my-nutrition-plans",
+							"host": ["{{base_url}}"],
+							"path": ["api", "member", "my-nutrition-plans"]
+						}
+					}
+				},
+				{
+					"name": "Get My Subscription",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{member_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/member/my-subscription",
+							"host": ["{{base_url}}"],
+							"path": ["api", "member", "my-subscription"]
+						}
+					}
+				},
+				{
+					"name": "Check In",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{member_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/member/check-in",
+							"host": ["{{base_url}}"],
+							"path": ["api", "member", "check-in"]
+						}
+					}
+				},
+				{
+					"name": "Check Out",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{member_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/member/check-out",
+							"host": ["{{base_url}}"],
+							"path": ["api", "member", "check-out"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🧪 Test Routes",
+			"item": [
+				{
+					"name": "Test API",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/test",
+							"host": ["{{base_url}}"],
+							"path": ["api", "test"]
+						}
+					}
+				},
+				{
+					"name": "Test Dashboard Stats",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/dashboard/stats/test",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dashboard", "stats", "test"]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "your_auth_token_here",
+			"type": "string"
+		},
+		{
+			"key": "admin_token",
+			"value": "your_admin_token_here",
+			"type": "string"
+		},
+		{
+			"key": "coach_token",
+			"value": "your_coach_token_here",
+			"type": "string"
+		},
+		{
+			"key": "member_token",
+			"value": "your_member_token_here",
+			"type": "string"
+		}
+	]
+}

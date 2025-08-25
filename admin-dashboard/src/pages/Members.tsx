@@ -171,7 +171,11 @@ const Members: React.FC = () => {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('ar-SA')
+    return new Date(dateString).toLocaleDateString('en-GB', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    })
   }
 
   const getGenderLabel = (gender: string) => {
@@ -744,27 +748,64 @@ const Members: React.FC = () => {
                   </h4>
                   <div className="bg-gray-50 rounded-lg p-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {selectedMemberDetails.subscriptions.map((subscription) => (
+                      {/* عرض الاشتراك النشط فقط */}
+                      {selectedMemberDetails.subscriptions
+                        .filter(subscription => subscription.is_active)
+                        .map((subscription) => (
                         <div key={subscription.id} className="bg-white p-4 rounded-lg shadow-sm border">
                           <div className="flex items-center justify-between mb-2">
                             <h5 className="font-medium text-gray-900">{subscription.membership.name}</h5>
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              subscription.status === 'active' ? 'bg-green-100 text-green-800' :
-                              subscription.status === 'expired' ? 'bg-red-100 text-red-800' :
-                              'bg-yellow-100 text-yellow-800'
-                            }`}>
-                              {subscription.status === 'active' ? 'نشط' :
-                               subscription.status === 'expired' ? 'منتهي' : 'ملغي'}
+                            <span className="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                              نشط
                             </span>
                           </div>
                           <div className="text-sm text-gray-600 space-y-1">
                             <div>من: {formatDate(subscription.start_date)}</div>
                             <div>إلى: {formatDate(subscription.end_date)}</div>
                             <div>السعر: {subscription.membership.price} ريال</div>
+                            <div className="text-xs text-gray-500">
+                              {subscription.notes && `ملاحظات: ${subscription.notes}`}
+                            </div>
                           </div>
                         </div>
                       ))}
+                      
+                      {/* عرض رسالة إذا لم يكن هناك اشتراك نشط */}
+                      {selectedMemberDetails.subscriptions.filter(subscription => subscription.is_active).length === 0 && (
+                        <div className="col-span-full text-center py-8 text-gray-500">
+                          <div className="text-4xl mb-2">💳</div>
+                          <p>لا يوجد اشتراك نشط حالياً</p>
+                        </div>
+                      )}
                     </div>
+                    
+                    {/* عرض جميع الاشتراكات (غير النشطة) في قسم منفصل */}
+                    {selectedMemberDetails.subscriptions.filter(subscription => !subscription.is_active).length > 0 && (
+                      <div className="mt-4">
+                        <h6 className="text-sm font-medium text-gray-700 mb-2">الاشتراكات السابقة:</h6>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                          {selectedMemberDetails.subscriptions
+                            .filter(subscription => !subscription.is_active)
+                            .map((subscription) => (
+                            <div key={subscription.id} className="bg-gray-100 p-3 rounded-lg border border-gray-200">
+                              <div className="flex items-center justify-between mb-2">
+                                <h6 className="font-medium text-gray-700 text-sm">{subscription.membership.name}</h6>
+                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                  subscription.status === 'expired' ? 'bg-red-100 text-red-800' :
+                                  'bg-yellow-100 text-yellow-800'
+                                }`}>
+                                  {subscription.status === 'expired' ? 'منتهي' : 'ملغي'}
+                                </span>
+                              </div>
+                              <div className="text-xs text-gray-600 space-y-1">
+                                <div>من: {formatDate(subscription.start_date)}</div>
+                                <div>إلى: {formatDate(subscription.end_date)}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -880,9 +921,21 @@ const Members: React.FC = () => {
                       {selectedMemberDetails.attendances.slice(0, 10).map((attendance, index) => (
                         <div key={index} className="bg-white p-4 rounded-lg shadow-sm border">
                           <div className="text-sm text-gray-600 space-y-1">
-                            <div>دخول: {new Date(attendance.check_in_time).toLocaleString('ar-SA')}</div>
+                            <div>دخول: {new Date(attendance.check_in_time).toLocaleString('en-GB', {
+                              year: 'numeric',
+                              month: '2-digit',
+                              day: '2-digit',
+                              hour: '2-digit',
+                              minute: '2-digit'
+                            })}</div>
                             {attendance.check_out_time && (
-                              <div>خروج: {new Date(attendance.check_out_time).toLocaleString('ar-SA')}</div>
+                              <div>خروج: {new Date(attendance.check_out_time).toLocaleString('en-GB', {
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                              })}</div>
                             )}
                             <div>التاريخ: {formatDate(attendance.created_at)}</div>
                           </div>
